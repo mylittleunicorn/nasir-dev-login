@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2021 at 05:33 AM
+-- Generation Time: Sep 02, 2021 at 07:55 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.22
 
@@ -42,10 +42,24 @@ CREATE TABLE `tb_produk` (
 
 CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `photo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`id`, `email`, `password`, `photo`) VALUES
+(1, '', '', ''),
+(2, 'b@gmail.com', 'b', ''),
+(3, 'b@gmail.com', 'b', ''),
+(4, 'b@gmail.com', 'b', ''),
+(5, 'b@gmail.com', 'b', ''),
+(6, 'b@gmail.com', 'b', ''),
+(7, 'b@gmail.com', 'b', ''),
+(8, 'b@gmail.com', 'b', '');
 
 --
 -- Indexes for dumped tables
@@ -77,7 +91,7 @@ ALTER TABLE `tb_produk`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

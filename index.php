@@ -1,15 +1,25 @@
 <?php
-  include "db/koneksi.php"
+  include "db/koneksi.php";
   if(isset($_POST['daftar'])){
-    $nama = $_POST['nama'];
-    $nim = $_POST['nim'];
-    $alamat = $_POST['alamat'];
- 
-// menginput data ke database
-mysqli_query($koneksi,"insert into mahasiswa values('','$nama','$nim','$alamat')");
- 
-// mengalihkan halaman kembali ke index.php
-header("location:index.php");
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $daftar = mysqli_query($koneksi,"INSERT INTO tb_user values('','$email','$password','')");
+    if ($daftar) {
+        $result='<div class="alert alert-success">Pendaftaran Berhasil, <a href="#" class="alert-link" data-toggle="modal" data-target="#exampleModalCenter">Klik Disini</a> untuk masuk.</div>';
+      }else {
+        $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+      }
+  }
+
+  if(isset($_POST['login'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $login = mysqli_query($koneksi,"INSERT INTO tb_user values('','$email','$password','')");
+    if ($login) {
+        $result='<div class="alert alert-success">Pendaftaran Berhasil, <a href="#" class="alert-link" data-toggle="modal" data-target="#exampleModalCenter">Klik Disini</a> untuk masuk.</div>';
+      }else {
+        $result='<div class="alert alert-danger">Sorry there was an error sending your message. Please try again later</div>';
+      }
   }
 ?>
 
@@ -56,13 +66,25 @@ header("location:index.php");
         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter">
           Masuk
         </button>
-        <button type="button" class="btn btn-warning ml-3 text-white" data-toggle="modal" data-target="#modalDaftar">
+        <button type="button" class="btn btn-warning text-white ml-2" data-toggle="modal" data-target="#modalDaftar">
           Daftar
         </button>
       </div>
     </div>
   </nav>
-  
+
+
+  <div class="container">
+    <div class="form-group mt-3">
+      <div class="col-sm-12 text-center">
+        <?php 
+          if(isset($result)){
+            echo $result;
+          }
+        ?>    
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL LOGIN -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -109,15 +131,15 @@ header("location:index.php");
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="">
+        <form action="" method="post">
           <div class="modal-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
             </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
           </div>
           <div class="modal-footer">
